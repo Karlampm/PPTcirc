@@ -1,0 +1,55 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# PPTcirc
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of PPTcirc is to provide functionality for the prior and posterior projected Polya tree for the analysis of circular data. Generates projected Polya tree paths, plots and summarize them.
+For circular data, estimates de posterior density and provides 95\% credible intervals with Markok Chain Monte Carlo. 
+
+
+## Installation
+
+You can install the released version of PPTcirc from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("PPTcirc")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(PPTcirc)
+## basic example code
+
+#Generates 5 paths for a prior projected Polya tree in radians, plot it and summarize the statistics for mean direction and concentration
+z <- dsimpriorppt(mu = c(5,5), nsim = 5, units = "radians")
+priorppt.plot(z, plot.type = "line")
+
+#For a dataset of directional data, provides the posterior projected Polta tree density
+z1 <- dsimpostppt(tapir, units = "radians", it = 5, ti =1, bi=0, ha = 1, hm =1)
+class(z1)
+postppt.summary(z1)
+postppt.plot(z1, plot.type= "line" , ylim = c(0,0.8))
+
+
+
+```
+
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
