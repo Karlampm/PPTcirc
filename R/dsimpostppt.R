@@ -42,6 +42,8 @@
 #' \item{data}{original dataset.}
 #' @export
 #'
+#' @seealso \link[PPTcirc]{postppt.plot}, \code{\link[PPTcirc]{postppt.summary}}
+#'
 #' @examples data(tapir)
 #' z1 <- dsimpostppt(tapir, units = "radians", it = 5, ti =1, bi=0, ha = 1, hm =1)
 #' class(z1)

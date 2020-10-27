@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # PPTcirc
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.com/karlampm/PPTcirc.svg?branch=master)](https://travis-ci.com/karlampm/PPTcirc)
 <!-- badges: end -->
 
 The goal of PPTcirc is to provide functionality for the prior and posterior projected Polya tree for the analysis of circular data. Generates projected Polya tree paths, plots and summarize them.

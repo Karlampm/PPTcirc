@@ -18,6 +18,7 @@
 #' priorppt.plot(z, plot.type = "line")
 #' summary(z$stats)
 #'
+#' @seealso \link[PPTcirc]{priorppt.plot}, \code{\link[PPTcirc]{priorppt.summary}}
 #'
 #' @return An object with class priorppt.circ whose underlying structure is a list containing the following components:
 #' \item{x}{points where the density is evaluated.}
