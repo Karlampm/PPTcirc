@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 The goal of PPTcirc is to provide functionality for the prior and posterior projected Polya tree for the analysis of circular data. Generates projected Polya tree paths, plots and summarize them.
-For circular data, estimates de posterior density and provides 95\% credible intervals with Markok Chain Monte Carlo. 
+For circular data, estimates de posterior density and provides 95\% credible intervals with Markov Chain Monte Carlo. 
 
 
 ## Installation

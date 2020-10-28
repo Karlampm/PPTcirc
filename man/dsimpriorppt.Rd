@@ -39,8 +39,10 @@ z <- dsimpriorppt(mu = c(5,5), nsim = 5, units = "radians")
 priorppt.plot(z, plot.type = "line")
 summary(z$stats)
 
-
 }
 \references{
 Nieto-Barajas, L.E. & Nunez-Antonio, G. (2019). Projected Polya tree. https://arxiv.org/pdf/1902.06020.pdf
+}
+\seealso{
+\code{\link[PPTcirc]{priorppt.plot}}, \code{\link[PPTcirc]{priorppt.summary}}
 }

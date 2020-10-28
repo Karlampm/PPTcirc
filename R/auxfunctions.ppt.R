@@ -1,14 +1,16 @@
-rdirichlet <- function (n, alpha)
+r.dirichlet <- function (n, alpha)
 {
-  l <- length(alpha)
-  x <- matrix(rgamma(l * n, alpha), ncol = l, byrow = TRUE)
-  sm <- x %*% rep(1, l)
-  x/as.vector(sm)
+  ll <- length(alpha)
+  x <- matrix(rgamma(ll * n, alpha), ncol = ll, byrow = TRUE)
+  sim <- x %*% rep(1, ll)
+  rd <- x/as.vector(sim)
+
+  return(rd)
 }
 
-ddirichlet <- function (x, alpha)
+d.dirichlet <- function (x, alpha)
 {
-  dirichlet1 <- function(x, alpha) {
+  aux_dirichlet <- function(x, alpha) {
     logD <- sum(lgamma(alpha)) - lgamma(sum(alpha))
     s <- (alpha - 1) * log(x)
     s <- ifelse(alpha == 1 & x == 0, -Inf, s)
@@ -24,11 +26,12 @@ ddirichlet <- function (x, alpha)
     if (any(dim(x) != dim(alpha)))
       stop("Mismatch between dimensions of 'x' and 'alpha'.")
     pd <- vector(length = nrow(x))
-    for (i in 1:nrow(x)) pd[i] <- dirichlet1(x[i, ], alpha[i,
+    for (i in 1:nrow(x)) pd[i] <- aux_dirichlet(x[i, ], alpha[i,
     ])
     pd[apply(x, 1, function(z) any(z < 0 | z > 1))] <- 0
     pd[apply(x, 1, function(z) all.equal(sum(z), 1) != TRUE)] <- 0
-    pd
+
+    return(pd)
 }
 
 pt.density <- function(jm, pb, b1,b2, mu, sig, x){
@@ -83,7 +86,7 @@ pt.branchprob <- function(mm, a){
   for(m in 1:mm){
     for(j in 1:2^(m-1)){
       for(k in 1:2^(m-1)){
-        x <- rdirichlet(1,a[m,1:4])
+        x <- r.dirichlet(1,a[m,1:4])
         y_df$y[i] <- x[1]
         y_df$m_[i] <- m
         y_df$j_[i] <- 2*j-1
@@ -218,7 +221,7 @@ post.pt.branchprob <- function(mm, a, nc_df){
         ncc[3] <- nc_df$nc[nc_df$m_ == m & nc_df$j_ == 2*j & nc_df$k_ == 2*k-1]
         ncc[4] <- nc_df$nc[nc_df$m_ == m & nc_df$j_ == 2*j & nc_df$k_ == 2*k]
 
-        x <- rdirichlet(1,a[m,1:4] + ncc)
+        x <- r.dirichlet(1,a[m,1:4] + ncc)
         y_df$y[i] <- x[1]
         y_df$m_[i] <- m
         y_df$j_[i] <- 2*j-1
@@ -271,7 +274,7 @@ pt.simaa <- function(aa,a,c0,c1,iota,delta,mm, aratea, y_df){
         aux[2] <- y_df$y[y_df$m_ == m & y_df$j_ == (2*j-1) & y_df$k_ == (2*k)]
         aux[3] <- y_df$y[y_df$m_ == m & y_df$j_ == (2*j) & y_df$k_ == (2*k-1)]
         aux[4] <- y_df$y[y_df$m_ == m & y_df$j_ == (2*j) & y_df$k_ == (2*k)]
-        q <-  q + log(ddirichlet(aux,a1[m,1:4])) - log(ddirichlet(aux,a[m,1:4]))
+        q <-  q + log(d.dirichlet(aux,a1[m,1:4])) - log(d.dirichlet(aux,a[m,1:4]))
       }
     }
   }

@@ -6,7 +6,7 @@
 \usage{
 dsimpostppt(datafile,units = c("radians", "degrees", "hours"),
 mm = 4, mu = c(0, 0), sig = 1, aa = 1, delta = 1.1,
-it = 10, bi = 0, ti = 1, kapa = 0.5, ha = 0, hm = 0,
+it = 500, bi = 50, ti = 2, kapa = 0.5, ha = 0, hm = 0,
 c0 = 1, c1 = 2, iota = 6, mu0 = 0, taum = 1, control.circular = list())
 }
 \arguments{
@@ -63,6 +63,7 @@ Performs posterior inference for a given a circular dataset with the Projected P
 }
 \examples{
 data(tapir)
+#It is advised to increase the number of iterations for a better fitting
 z1 <- dsimpostppt(tapir, units = "radians", it = 5, ti =1, bi=0, ha = 1, hm =1)
 class(z1)
 length(z1$acceptancerate)
@@ -74,4 +75,7 @@ postppt.plot(z1, plot.type= "line" , ylim = c(0,0.8))
 }
 \references{
 Nieto-Barajas, L.E. & Nunez-Antonio, G. (2019). Projected Polya tree. https://arxiv.org/pdf/1902.06020.pdf
+}
+\seealso{
+\code{\link[PPTcirc]{postppt.plot}}, \code{\link[PPTcirc]{postppt.summary}}
 }

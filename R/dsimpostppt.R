@@ -3,6 +3,7 @@
 #'
 #' @importFrom graphics boxplot hist lines matplot par
 #' @importFrom stats acf dgamma dnorm qnorm quantile rgamma rnorm runif
+#' @importFrom progress progress_bar
 #'
 #' @description Performs posterior inference for a given a circular dataset with the Projected Polya Tree via a MCMC algorithm.
 #' @param datafile the data from which the estimate is to be computed. The object is circular or will be coerced to circular.
@@ -25,7 +26,7 @@
 #'
 #' @usage dsimpostppt(datafile,units = c("radians", "degrees", "hours"),
 #' mm = 4, mu = c(0, 0), sig = 1, aa = 1, delta = 1.1,
-#' it = 10, bi = 0, ti = 1, kapa = 0.5, ha = 0, hm = 0,
+#' it = 500, bi = 50, ti = 2, kapa = 0.5, ha = 0, hm = 0,
 #' c0 = 1, c1 = 2, iota = 6, mu0 = 0, taum = 1, control.circular = list())
 #'
 #' @return An object of class postppt.circ whose underlying structure is a list containing the following components:
@@ -42,9 +43,10 @@
 #' \item{data}{original dataset.}
 #' @export
 #'
-#' @seealso \link[PPTcirc]{postppt.plot}, \code{\link[PPTcirc]{postppt.summary}}
+#' @seealso \code{\link[PPTcirc]{postppt.plot}}, \code{\link[PPTcirc]{postppt.summary}}
 #'
 #' @examples data(tapir)
+#' #It is advised to increase the number of iterations for a better fitting
 #' z1 <- dsimpostppt(tapir, units = "radians", it = 5, ti =1, bi=0, ha = 1, hm =1)
 #' class(z1)
 #' length(z1$acceptancerate)
@@ -56,7 +58,7 @@
 #' @references  Nieto-Barajas, L.E. & Nunez-Antonio, G. (2019). Projected Polya tree. https://arxiv.org/pdf/1902.06020.pdf
 #'
 dsimpostppt <- function(datafile, units = c("radians", "degrees", "hours"), mm=4,mu=c(0,0),sig=1,aa=1,delta=1.1,
-                        it=10,bi=0,ti=1,kapa=0.5,
+                        it=500,bi=50,ti=2,kapa=0.5,
                         ha=0,hm=0, c0=1, c1=2, iota=6, mu0=0, taum=1,
                         control.circular=list()){
 
@@ -139,7 +141,8 @@ dsimpostppt <- function(datafile, units = c("radians", "degrees", "hours"), mm=4
 
 
   #-------------- MCMC ---------------------------
-  #pb_ <- txtProgressBar(min = 0, max = it, style = 3)
+  #Progress bar
+  progbar <- progress_bar$new(total = it)
 
   #Defining returns
   ss <- 1
@@ -148,6 +151,9 @@ dsimpostppt <- function(datafile, units = c("radians", "degrees", "hours"), mm=4
 
 
   for(s in 1:it){
+
+    progbar$tick()
+    Sys.sleep(1 / 100)
 
     #Simulating from y(m,j,k)
     y_df <- post.pt.branchprob(mm, a, nc_df)
