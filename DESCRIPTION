@@ -4,7 +4,7 @@ Title: Projected Polya Tree for Circular Data
 Version: 0.1.0
 Author: Karla Mayra Perez [aut, cre], Luis E. Nieto-Barajas [aut]
 Maintainer: Karla Mayra Perez <karla.mayra25@gmail.com>
-Description: Provides functionality for the prior and posterior projected Polya tree for the analysis of circular data.
+Description: Provides functionality for the prior and posterior projected Polya tree for the analysis of circular data (Nieto-Barajas and Nunez-Antonio (2019) <arXiv:1902.06020>).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

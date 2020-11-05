@@ -51,7 +51,7 @@
 #' class(z1)
 #' length(z1$acceptancerate)
 #' z1$acceptancerate
-#' \dontrun{
+#' \donttest{
 #' postppt.summary(z1)
 #' postppt.plot(z1, plot.type= "line" , ylim = c(0,0.8))
 #' }

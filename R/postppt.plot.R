@@ -21,7 +21,7 @@
 #' @param ylim range to be encompassed by "y" axis.
 #' @param interval logical. If TRUE 95\% credible intervals will be shown in the circular and linear plots.
 #'
-#' @examples \dontrun{ z2 <- dsimpostppt(deer, units = "radians", it = 10, ti =1, bi=0, ha = 1)
+#' @examples \donttest{ z2 <- dsimpostppt(deer, units = "radians", it = 10, ti =1, bi=0, ha = 1)
 #' postppt.plot(z2, plot.type= "line" , shrink = 1.4, tol = 1.2, ylim = c(0,0.6))
 #' postppt.summary(z2)
 #' postppt.plot(z2, plot.type= "cpos" )
@@ -79,16 +79,19 @@ postppt.plot <- function(postppt.circ, plot.type=c("circle", "line", "summary", 
     boxplot(postppt.circ$stats, main = "Boxplot of moments of projected polya tree")
 
   }else if(plot.type == "a.sim"){
-    par(mfrow=c(1, 2))
+    oldpar <- par(no.readonly = TRUE)
+    on.exit(par(oldpar))
+    par(mfrow=c(1,2))
     hist(postppt.circ$aa.sims,main = "Histogram of alpha",xlab="", col= "grey80")
     plot(postppt.circ$aa.sims, type="l", xlab= "Iteration", ylab = "Value", main = "Trace plot")
     acf(postppt.circ$aa.sims, main = "Alpha simulations")
     erg.mean  <- (cumsum(postppt.circ$aa.sims) / seq_along(postppt.circ$aa.sims))
     plot(erg.mean,type="l", xlab = "Iteration", ylab = " ", main = "Ergodic mean")
-    par(mfrow=c(1, 1))
   }else if(plot.type == "mu.sim"){
 
-    par(mfrow=c(1, 2))
+    oldpar <- par(no.readonly = TRUE)
+    on.exit(par(oldpar))
+    par(mfrow=c(1,2))
     hist(postppt.circ$mu.sims[,1],main = "Histogram of mu1",xlab="", col= "grey80")
     plot(postppt.circ$mu.sims[,1], type="l", xlab= "Iteration", ylab = "mu1", main = "Trace plot")
     acf(postppt.circ$mu.sims[,1], main = "Mu1 simulations")
@@ -101,7 +104,6 @@ postppt.plot <- function(postppt.circ, plot.type=c("circle", "line", "summary", 
     erg.mean  <- (cumsum(postppt.circ$mu.sims[,2]) / seq_along(postppt.circ$mu.sims[,2]))
 
     plot(erg.mean,type="l", xlab = "Iteration", ylab = "mu1", main = "Ergodic mean")
-    par(mfrow=c(1, 1))
     }else if(plot.type == "cpos"){
 
     plot(postppt.circ$cpo, type = "p", ylab = "cpo", main = "CPO graphic")

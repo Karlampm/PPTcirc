@@ -34,7 +34,7 @@ shrink = 1, tol = 0.04, ylim = NULL)
 Plots posterior projected Polya tree estimates.
 }
 \examples{
-\dontrun{ z2 <- dsimpostppt(deer, units = "radians", it = 10, ti =1, bi=0, ha = 1)
+\donttest{ z2 <- dsimpostppt(deer, units = "radians", it = 10, ti =1, bi=0, ha = 1)
 postppt.plot(z2, plot.type= "line" , shrink = 1.4, tol = 1.2, ylim = c(0,0.6))
 postppt.summary(z2)
 postppt.plot(z2, plot.type= "cpos" )
