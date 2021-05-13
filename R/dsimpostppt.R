@@ -108,7 +108,7 @@ dsimpostppt <- function(datafile, units = c("radians", "degrees", "hours"), mm=4
   t<-seq(0,2*pi,length.out=ll)
 
   dr <- (sqrt(mu[1]^2+ mu[2]^2)+4)/ll
-  r<-seq(dr, sqrt(mu[1]^2+ mu[2]^2)+4,length.out=ll)
+  r<-seq(0, sqrt(mu[1]^2+ mu[2]^2)+4,length.out=ll)
 
   #Definition of alpha parameters
   a <-  matrix(data = NA, nrow = mm, ncol = 4, byrow = FALSE, dimnames = NULL)
@@ -188,7 +188,9 @@ dsimpostppt <- function(datafile, units = c("radians", "degrees", "hours"), mm=4
     }
 
     #Simulating from mu
+    if(hm==1){
     mu <- pt.simmu(n,taum,mu0,rh, th)
+    }
 
     #Re-defining partitions
     if(hm==1){

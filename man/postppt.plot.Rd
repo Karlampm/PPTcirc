@@ -28,7 +28,11 @@ shrink = 1, tol = 0.04, ylim = NULL)
 
 \item{tol}{proportion of white space at the margins of plot.}
 
+\item{sep}{constant used to specify the distance between stacked points. Default is 0.025;smaller values will create smaller spaces}
+
 \item{ylim}{range to be encompassed by "y" axis.}
+
+\item{xlim}{range to be encompassed by "x" axis.}
 }
 \description{
 Plots posterior projected Polya tree estimates.
